@@ -1,0 +1,132 @@
+<?php
+session_start();
+if(!isset($_SESSION['secretery_username'])){
+                    echo "<script>alert('Please login') </script>";
+echo "<script> document.location.href='kindex.php' </script>";
+
+					}
+include("includes/db_connection.php");
+/////////////*************PRINT KUDUMBASHREE NAME///////////******
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>kudumbashree-delete member</title>
+ 	<?php
+	
+include 'includes/secretory_header.php';
+	?>
+</head>
+<body class="pad_top">
+	<div class="container">
+	<h3>Delete member</h3>
+<form method="post" action="" class="form-horizontal">	
+	<div class="form-group">
+    <label for="inputPassword" class="col-sm-2 control-label">Member_id:</label>
+    <div class="col-sm-10">
+		<input type="text" class='form-control' name="affi" placeholder="m_id" required>
+    </div>
+   </div>   
+   <div class="form-group">
+    	<label for="inputPassword" class="col-sm-2 control-label"></label>
+    <div class="col-sm-10">
+	<input type="submit" class="btn btn-primary btn-lg btn-block" value="delete" name="delete">
+      	
+    </div>
+   </div>
+</form>
+
+	</div>
+<?php
+if(isset($_POST['delete']))
+	
+
+	{
+		$affi_id=$_POST['affi'];
+		
+//************checking that the affiliation is correct
+		
+/*		$check="select * from affiliation_number where affiliation_number='$affiliation_number'";
+		//$check="select * from affiliation_number where affiliation_number='$affiliation_number'";
+		$rescheck=mysqli_query($connection,$check);
+		//echo $rescheck;
+		echo "<script>alert($rescheck)</script>";
+		
+		//$rescheck = mysqli_query($connection,$check);
+		
+		//echo $rescheck;
+		
+	}
+*/
+//*****************deleting query
+
+	//$query="delete from user_password where m_id='$affi_id'";
+//$query="delete from user_password where m_id={$affi_id}";		
+$query1="delete from loan_repay where m_id='$affi_id'";
+$result=mysqli_query($connection,$query1);
+		
+		if($result)
+		{
+		//	echo "<script>alert('delete successful')</script>";
+		}
+		else
+		{
+			echo "<script>alert('cannot delete/this may use')</script>";
+		}	
+$query2="delete from member_loan where m_id='$affi_id'";
+$result=mysqli_query($connection,$query2);
+		
+		if($result)
+		{
+		//	echo "<script>alert('delete successful')</script>";
+		}
+		else
+		{
+			echo "<script>alert('cannot delete/this may use')</script>";
+		}	
+$query3="delete from member_deposit where m_id='$affi_id'";
+$result=mysqli_query($connection,$query3);
+		
+		if($result)
+		{
+		//	echo "<script>alert('delete successful')</script>";
+		}
+		else
+		{
+			echo "<script>alert('cannot delete/this may use')</script>";
+		}	
+$query4="delete from user_password where m_id={$affi_id}";
+$result=mysqli_query($connection,$query4);
+		
+		if($result)
+		{
+		//	echo "<script>alert('delete successful')</script>";
+		}
+		else
+		{
+			echo "<script>alert('cannot delete/this may use')</script>";
+		}			
+$query5="delete from member_add where m_id='$affi_id'";
+
+	//$query="delete from user_password where m_id={$affi_id}";	
+	$result=mysqli_query($connection,$query5);
+		
+		if($result)
+		{
+			echo "<script>alert('delete successful')</script>";
+		}
+		else
+		{
+			echo "<script>alert('cannot delete/this may use')</script>";
+		}	
+		
+	}
+
+?>
+
+<?php
+include 'includes/footer.php';
+include 'includes/script.php';
+?>
+</body>
+</html>
